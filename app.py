@@ -10,6 +10,7 @@ data = datetime.now().strftime('%Y-%m-%d')
 def conexao_db():
     return mysql.connector.connect(
         host=st.secrets["db_host"],
+        port=st.secrets["db_port"],
         user=st.secrets["db_user"],
         password=st.secrets["db_password"],
         database=st.secrets["database"]
@@ -17,8 +18,10 @@ def conexao_db():
 
 
 def conn_sqlalchemy():
-    return create_engine(f"mysql+mysqlconnector://{st.secrets['db_user']}:{st.secrets['db_password']}"
-                         f"@{st.secrets['db_host']}/{st.secrets['database']}")
+    return create_engine(
+        f"mysql+mysqlconnector://{st.secrets['db_user']}:{st.secrets['db_password']}"
+        f"@{st.secrets['db_host']}:{st.secrets['db_port']}/{st.secrets['database']}"
+    )
 
 
 def deleta_carrinho():
