@@ -714,6 +714,9 @@ def css_botao():
         background-color: #0c1020;
         border-color: #041360;
     }
+    .eczjsme8 {
+        background-color: #0c0c33;
+    }
     </style>
     """
     return st.markdown(css, unsafe_allow_html=True)
