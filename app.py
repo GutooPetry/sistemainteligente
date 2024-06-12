@@ -636,6 +636,9 @@ def css_botao():
         background-color: #271bda;
         color: #dae6e6;
     }
+    .st-emotion-cache-2ik9yx {
+        background-color: red;
+    }
     .e1f1d6gn4:nth-child(7) .ef3psqc12:hover {
         background-color: #942020;
         color: white;
