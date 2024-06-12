@@ -636,10 +636,6 @@ def css_botao():
         background-color: #271bda;
         color: #dae6e6;
     }
-    #root :nth-child(1) {
-        color: #dae6e6;
-        background-color: #096004;
-    }
     .e1f1d6gn4:nth-child(7) .ef3psqc12:hover {
         background-color: #942020;
         color: white;
