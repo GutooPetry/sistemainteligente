@@ -636,6 +636,14 @@ def css_botao():
         background-color: #271bda;
         color: #dae6e6;
     }
+    .e1f1d6gn4:nth-child(1) .ef3psqc12 {
+        color: #dae6e6;
+        background-color: #096004;
+    }
+        .e1f1d6gn4:nth-child(1) .ef3psqc12:hover {
+        color: #dae6e6;
+        background-color: #12b716;
+    }
     .e1f1d6gn4:nth-child(7) .ef3psqc12:hover {
         background-color: #942020;
         color: white;
