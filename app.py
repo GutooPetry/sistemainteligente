@@ -50,7 +50,6 @@ def verifica_credenciais(username, password):
 # Interface de login
 def login():
     st.title("Sistema Estoque Inteligente")
-    st.subheader("Informe os Dados de Acesso")
     nome_usuario = st.text_input("Nome de Usuário:")
     senha_usuario = st.text_input("Senha:", type="password")
     botao_login = st.button("Login")
