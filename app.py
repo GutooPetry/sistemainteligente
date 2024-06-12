@@ -717,6 +717,10 @@ def css_botao():
     .eczjsme8 {
         background-color: #0c0c33;
     }
+    #number_input_4, #number_input_5 {
+        background-color: #1a1a1d;
+        border-color: #041360; 
+    }
     </style>
     """
     return st.markdown(css, unsafe_allow_html=True)
