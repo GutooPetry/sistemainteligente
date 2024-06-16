@@ -560,7 +560,7 @@ def secao_vendas():
                     tabela_carrinho = pd.read_sql(sql, conn)
                     st.dataframe(tabela_carrinho, hide_index=True, use_container_width=True)
 
-                if st.form_submit_button('Finalizar Compra'):
+                if st.form_submit_button('Finalizar Compra'):  # ON-CLICK
                     # if verifica_status() == 'approved':
 
                     conn = conexao_db()
