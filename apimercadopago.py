@@ -5,11 +5,11 @@ import mysql.connector
 
 def conexao_db():
     return mysql.connector.connect(
-        host="viaduct.proxy.rlwy.net",
-        user="root",
-        password="doUJUDeEIZUkkocinrlUoUgCaLmJwXiO",
-        database="railway",
-        port=16292
+        host=st.secrets["db_host"],
+        port=st.secrets["db_port"],
+        user=st.secrets["db_user"],
+        password=st.secrets["db_password"],
+        database=st.secrets["database"]
     )
 
 
