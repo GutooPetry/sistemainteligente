@@ -182,27 +182,37 @@ def cadastrar_produto():
                 st.subheader('Preencha os Campos para Atualizar o Preço do Produto')
                 cod_barras_up = st.text_input('Informe o Código de Barras do Produto:', placeholder='Código de Barras')
                 preco_up = st.number_input('Escolha um novo Preço para o produto:')
-
+                
                 if st.form_submit_button('Atualizar Preço'):
-                    if cod_barras_up != '' and preco_up > 0:
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
-                        dados = (st.session_state['username'],)
-                        cursor.execute(sql, dados)
-                        nivel_acesso = cursor.fetchall()[0][0]
-
-                        if nivel_acesso == 3:
-                            sql = ('UPDATE produtos p1 JOIN (SELECT id FROM produtos WHERE cod_barras = %s) '
-                                   'p2 ON p1.id = p2.id SET p1.preco = %s;')
-                            dados = (cod_barras_up, preco_up)
+                    lista_produtos = []
+                    conn = conexao_db()
+                    cursor = conn.cursor()
+                    sql = 'SELECT cod_barras FROM produtos;'
+                    cursor.execute(sql)
+                    for item in cursor.fetchall():
+                        lista_produtos.append(item[0])
+                        
+                    if cod_barras_up in lista_produtos:
+                    
+                        if cod_barras_up != '' and preco_up > 0:
+                            sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
+                            dados = (st.session_state['username'],)
                             cursor.execute(sql, dados)
-                            conn.commit()
-                            st.success(f'O Preço do Produto foi Atualizado para R${preco_up} ✅')
+                            nivel_acesso = cursor.fetchall()[0][0]
+    
+                            if nivel_acesso == 3:
+                                sql = ('UPDATE produtos p1 JOIN (SELECT id FROM produtos WHERE cod_barras = %s) '
+                                       'p2 ON p1.id = p2.id SET p1.preco = %s;')
+                                dados = (cod_barras_up, preco_up)
+                                cursor.execute(sql, dados)
+                                conn.commit()
+                                st.success(f'O Preço do Produto foi Atualizado para R${preco_up} ✅')
+                            else:
+                                st.error('Nível de Acesso não permitido para está ação ❌')
                         else:
-                            st.error('Nível de Acesso não permitido para está ação ❌')
+                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
                     else:
-                        st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        st.error('❌ Erro! O Produto não é Cadastrado no Sistema ❌')
 
         with tab3:
             with st.form('atualizar-marca', True):
