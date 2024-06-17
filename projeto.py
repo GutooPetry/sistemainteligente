@@ -230,7 +230,7 @@ def cadastrar_produto():
                     for item in cursor.fetchall():
                         lista_produtos.append(item[0])
                     
-                    if marca_up in lista_produtos:    
+                    if cod_barras_up in lista_produtos:    
                         if cod_barras_up != '' and marca_up != '':
                             conn = conexao_db()
                             cursor = conn.cursor()
