@@ -254,7 +254,7 @@ def cadastrar_produto():
                         st.error('❌ Erro! O Produto não é Cadastrado no Sistema ❌')
 
         with tab4:
-            with st.form('atualizar-nome-produto'):
+            with st.form('atualizar-nome-produto', True):
                 st.title('Atualizar Nome de Produto')
                 st.subheader('Preencha os Campos para Atualizar o Nome do Produto')
                 cod_barras_up = st.text_input('Informe o Código de Barras do Produto:', placeholder='Código de Barras')
