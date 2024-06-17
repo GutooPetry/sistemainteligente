@@ -511,7 +511,7 @@ def cadastrar_usuario():
                     if cpf_up != '' and senha_usuario_up != '' and confirma_senha != '':
                         conn = conexao_db()
                         cursor = conn.cursor()
-                        sql = 'SELECT nivel_acesso FROM usuarios WHERE cpf = %s;'
+                        sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
                         dados = (st.session_state['username'],)
                         cursor.execute(sql, dados)
                         nivel_acesso = cursor.fetchall()[0][0]
@@ -531,7 +531,7 @@ def cadastrar_usuario():
                         else:
                             st.error('Nível de Acesso não permitido para está ação ❌')
                     else:
-                        st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        st.error('❌ Erro! Preencha todos os dados corretamente ❌')
 
 
 def secao_vendas():
