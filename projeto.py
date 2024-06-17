@@ -494,7 +494,7 @@ def cadastrar_usuario():
                             else:
                                 st.error('Nível de Acesso não permitido para está ação ❌')
                         else:
-                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                            st.error('❌ Erro! Preencha todos os dados corretamente ❌')
                     else:
                         st.error('❌ Erro! O Usuário não é Cadastrado no Sistema ❌')
                         
@@ -508,30 +508,42 @@ def cadastrar_usuario():
                 confirma_senha = st.text_input('Confirme a Senha:', placeholder='Insira a Senha Novamente',
                                                type='password')
                 if st.form_submit_button('Alterar Senha'):
-                    if cpf_up != '' and senha_usuario_up != '' and confirma_senha != '':
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
-                        dados = (st.session_state['username'],)
-                        cursor.execute(sql, dados)
-                        nivel_acesso = cursor.fetchall()[0][0]
-
-                        if nivel_acesso == 3:
-                            if senha_usuario_up == confirma_senha:
-                                conn = conexao_db()
-                                cursor = conn.cursor()
-                                sql = ('UPDATE usuarios user1 JOIN (SELECT id FROM usuarios WHERE cpf = %s) '
-                                       'user2 ON user1.id = user2.id SET user1.senha_usuario = %s;')
-                                dados = (cpf_up, senha_usuario_up)
-                                cursor.execute(sql, dados)
-                                conn.commit()
-                                st.success(f'Senha de Usuário Alterada com Sucesso ✅')
+                    lista_usuarios = []
+                    conn = conexao_db()
+                    cursor = conn.cursor()
+                    sql = 'SELECT cpf FROM usuarios;'
+                    cursor.execute(sql)
+                    for item in cursor.fetchall():
+                        lista_usuarios.append(item[0])
+                    
+                    if cpf_up in lista_usuarios: 
+                        
+                        if cpf_up != '' and senha_usuario_up != '' and confirma_senha != '':
+                            conn = conexao_db()
+                            cursor = conn.cursor()
+                            sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
+                            dados = (st.session_state['username'],)
+                            cursor.execute(sql, dados)
+                            nivel_acesso = cursor.fetchall()[0][0]
+    
+                            if nivel_acesso == 3:
+                                if senha_usuario_up == confirma_senha:
+                                    conn = conexao_db()
+                                    cursor = conn.cursor()
+                                    sql = ('UPDATE usuarios user1 JOIN (SELECT id FROM usuarios WHERE cpf = %s) '
+                                           'user2 ON user1.id = user2.id SET user1.senha_usuario = %s;')
+                                    dados = (cpf_up, senha_usuario_up)
+                                    cursor.execute(sql, dados)
+                                    conn.commit()
+                                    st.success(f'Senha de Usuário Alterada com Sucesso ✅')
+                                else:
+                                    st.error('Erro! Você informou 2 Senhas diferentes ❌')
                             else:
-                                st.error('Erro! Você informou 2 Senhas diferentes ❌')
+                                st.error('Nível de Acesso não permitido para está ação ❌')
                         else:
-                            st.error('Nível de Acesso não permitido para está ação ❌')
+                            st.error('❌ Erro! Preencha todos os dados corretamente ❌')
                     else:
-                        st.error('❌ Erro! Preencha todos os dados corretamente ❌')
+                        st.error('❌ Erro! O Usuário não é Cadastrado no Sistema ❌')
 
 
 def secao_vendas():
