@@ -465,27 +465,39 @@ def cadastrar_usuario():
                 nome_usuario_up = st.text_input('Novo Nome de Usuário', placeholder='Escolha um novo Nome de Usuário')
 
                 if st.form_submit_button('Alterar Username'):
-                    if cpf_up != '' and nome_usuario_up != '':
-                        conn = conexao_db()
-                        cursor = conn.cursor()
-                        sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
-                        dados = (st.session_state['username'],)
-                        cursor.execute(sql, dados)
-                        nivel_acesso = cursor.fetchall()[0][0]
-
-                        if nivel_acesso == 3:
+                    lista_usuarios = []
+                    conn = conexao_db()
+                    cursor = conn.cursor()
+                    sql = 'SELECT cpf FROM usuarios;'
+                    cursor.execute(sql)
+                    for item in cursor.fetchall():
+                        lista_usuarios.append(item[0])
+                    
+                    if cpf_up in lista_usuarios: 
+                        if cpf_up != '' and nome_usuario_up != '':
                             conn = conexao_db()
                             cursor = conn.cursor()
-                            sql = ('UPDATE usuarios user1 JOIN (SELECT id FROM usuarios WHERE cpf = %s) '
-                                   'user2 ON user1.id = user2.id SET user1.nome_usuario = %s;')
-                            dados = (cpf_up, nome_usuario_up)
+                            sql = 'SELECT nivel_acesso FROM usuarios WHERE nome_usuario = %s;'
+                            dados = (st.session_state['username'],)
                             cursor.execute(sql, dados)
-                            conn.commit()
-                            st.success(f'Nome de Usuário Alterado para {nome_usuario_up} ✅')
+                            nivel_acesso = cursor.fetchall()[0][0]
+    
+                            if nivel_acesso == 3:
+                                conn = conexao_db()
+                                cursor = conn.cursor()
+                                sql = ('UPDATE usuarios user1 JOIN (SELECT id FROM usuarios WHERE cpf = %s) '
+                                       'user2 ON user1.id = user2.id SET user1.nome_usuario = %s;')
+                                dados = (cpf_up, nome_usuario_up)
+                                cursor.execute(sql, dados)
+                                conn.commit()
+                                st.success(f'Nome de Usuário Alterado para {nome_usuario_up} ✅')
+                            else:
+                                st.error('Nível de Acesso não permitido para está ação ❌')
                         else:
-                            st.error('Nível de Acesso não permitido para está ação ❌')
+                            st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
                     else:
-                        st.error('❌ Erro! Preencha todos os dados do produto corretamente ❌')
+                        st.error('❌ Erro! O Usuário não é Cadastrado no Sistema ❌')
+                        
         with tab3:
             with st.form('atualizar-senha-usuario', True):
                 st.title('Alterar Senha de Usuário')
@@ -500,7 +512,7 @@ def cadastrar_usuario():
                         conn = conexao_db()
                         cursor = conn.cursor()
                         sql = 'SELECT nivel_acesso FROM usuarios WHERE cpf = %s;'
-                        dados = (cpf_up,)
+                        dados = (st.session_state['username'],)
                         cursor.execute(sql, dados)
                         nivel_acesso = cursor.fetchall()[0][0]
 
