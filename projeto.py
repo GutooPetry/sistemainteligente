@@ -222,15 +222,15 @@ def cadastrar_produto():
                 marca_up = st.text_input('Escolha uma Nova Marca:', placeholder='Nova Marca do Produto')
 
                 if st.form_submit_button('Atualizar Marca'):
-                    lista_marcas = []
+                    lista_produtos = []
                     conn = conexao_db()
                     cursor = conn.cursor()
-                    sql = 'SELECT marca_produto FROM produtos;'
+                    sql = 'SELECT cod_barras FROM produtos;'
                     cursor.execute(sql)
                     for item in cursor.fetchall():
-                        lista_marcas.append(item[0])
+                        lista_produtos.append(item[0])
                     
-                    if marca_up in lista_marcas:    
+                    if marca_up in lista_produtos:    
                         if cod_barras_up != '' and marca_up != '':
                             conn = conexao_db()
                             cursor = conn.cursor()
@@ -261,15 +261,15 @@ def cadastrar_produto():
                 nome_produto_up = st.text_input('Escolha um Novo Nome:', placeholder='Novo Nome do Produto')
 
                 if st.form_submit_button('Atualizar Nome'):
-                    lista_nomes = []
+                    lista_produtos = []
                     conn = conexao_db()
                     cursor = conn.cursor()
-                    sql = 'SELECT nome_produto FROM produtos;'
+                    sql = 'SELECT cod_barras FROM produtos;'
                     cursor.execute(sql)
                     for item in cursor.fetchall():
-                        lista_nomes.append(item[0])
+                        lista_produtos.append(item[0])
                     
-                    if nome_produto_up in lista_nomes: 
+                    if cod_barras_up in lista_produtos: 
                         if cod_barras_up != '' and nome_produto_up != '':
                             conn = conexao_db()
                             cursor = conn.cursor()
