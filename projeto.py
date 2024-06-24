@@ -347,8 +347,10 @@ def aplicar_promocoes():
                 cursor = conn.cursor()
                 sql = 'SELECT cod_barras FROM produtos;'
                 cursor.execute(sql)
-
-                if cod_barras in cursor.fetchall() and cod_barras != '' and preco_promo != '':
+                lista_produtos = []
+                for codigo in cursor.fetchall():
+    	            lista_produtos.append(codigo[0])
+                if cod_barras in lista_produtos and cod_barras != '' and preco_promo != '':
                     select = f'SELECT id FROM produtos WHERE cod_barras = {cod_barras}'
                     cursor.execute(select)
                     produto_id = cursor.fetchall()[0][0]
