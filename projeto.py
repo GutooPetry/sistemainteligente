@@ -360,6 +360,7 @@ def aplicar_promocoes():
                     dados = (produto_id, cod_barras, preco_promo, data_inicio, data_termino)
                     cursor.execute(sql, dados)
                     conn.commit()
+                    st.success('Promoção Aplicada com Sucesso')
                 else:
                     st.error('❌ Erro! O Produto não é cadastrado no sistema ❌')
 
