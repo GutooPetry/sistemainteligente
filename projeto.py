@@ -103,6 +103,9 @@ def menu():
             st.session_state.clear()
             st.experimental_rerun()
 
+        if st.sidebar.button('Documentação'):
+            st.session_state.form_to_show = 'documentacao'
+
     if st.session_state.form_to_show == 'cadastro-produtos':
         cadastrar_produto()
 
@@ -120,6 +123,17 @@ def menu():
 
     elif st.session_state.form_to_show == 'secao-vendas':
         secao_vendas()
+        
+    elif st.session_state.form_to_show == 'documentacao':
+        documentacao()
+
+
+def documentacao():
+    tab1 ,tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(['CADASTRAR PRODUTOS', 'ATUALIZAR PRODUTOS', 'ENTRADA DE PRODUTOS', 'APLICAR PROMOÇÕES', 'ANÁLISE DE RELATÓRIOS',
+                                                                          'CADASTRAR USUÁRIOS', 'ATUALIZAR DADOS USUÁRIOS', 'SEÇÃO DE VENDAS'])
+
+    with tab1:
+        pass
 
 
 def cadastrar_produto():
