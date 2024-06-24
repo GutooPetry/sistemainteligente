@@ -129,11 +129,60 @@ def menu():
 
 
 def documentacao():
-    tab1 ,tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(['CADASTRAR PRODUTOS', 'ATUALIZAR PRODUTOS', 'ENTRADA DE PRODUTOS', 'APLICAR PROMOÇÕES', 'ANÁLISE DE RELATÓRIOS',
-                                                                          'CADASTRAR USUÁRIOS', 'ATUALIZAR DADOS USUÁRIOS', 'SEÇÃO DE VENDAS'])
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(
+        ['CADASTRAR PRODUTOS', 'ATUALIZAR PRODUTOS', 'ENTRADA DE PRODUTOS', 'APLICAR PROMOÇÕES',
+         'ANÁLISE DE RELATÓRIOS',
+         'CADASTRAR USUÁRIOS', 'ATUALIZAR DADOS USUÁRIOS', 'SEÇÃO DE VENDAS'])
 
     with tab1:
-        pass
+        st.title('Instrução para Cadastro de Produtos')
+        st.image('img.png')
+        st.write('PARA CADASTRAR UM PRODUTO PREENCHA TODOS OS CAMPOS E CLIQUE EM “CADASTRAR”.')
+
+    with tab2:
+        st.title('Instrução para Atualizar Dados de Produtos')
+        st.image('img_1.png')
+        st.write('PARA REALIZAR ATUALIZAÇÃO DE PRODUTOS, USE AS ABAS DISPONÍVEIS NA ÁREA DE CADASTRO DE PRODUTOS')
+
+    with tab3:
+        st.title('Instrução para Registrar Entrada de Produtos')
+        st.image('img_2.png')
+        st.write('PARA REGISTRAR ENTRADA DE PRODUTOS NO ESTOQUE, PREENCHA OS CAMPOS INFORMANDO O CÓDIGO DE BARRAS '
+                 'DO PRODUTO, PREÇO DE ENTRADA E A QUANTIDADE.')
+
+    with tab4:
+        st.title('Instrução para Aplicação de Promoções')
+        st.image('img_3.png')
+        st.write('NA ÁREA “APLICAR PPROMOÇÕES”, INFORME O CÓDIGO DE BARRAS DO PRODUTO QUE DESEJA APLICAR PROMOÇÃO, '
+                 'O PREÇO PROMOCIONAL E A DATA DE CORTE DESTA PROMOÇÃO, APÓS ESSA DATA O PREÇO DO PRODUTO VOLTARÁ '
+                 'A SER O QUE FOI CADASTRADO INICIALMENTE.')
+
+    with tab5:
+        st.title('Instrução para Análise de Relatórios')
+        st.image('img_4.png')
+        st.write('NA ÁREA DE ÁNALISE DE RELATÓRIOS, PODE-SE OBSERVAR SEU ESTOQUE ATUAL, OS PRODUTOS MAIS VENDIDOS NOS '
+                 'ÚLTIMOS 30 DIAS, E TAMBÉM OS PRODUTOS MAIS VENDIDOS GERAL.')
+
+    with tab6:
+        st.title('Instrução para Cadastro de Usuários')
+        st.image('img_5.png')
+        st.write('PARA CADASTRAR UM USUÁRIO PREENCHA TODOS OS CAMPOS, NÃO PODE EXISTIR 2 CADASTROS COM O MESMO NOME '
+                 'DE USÚARIO E CPF.')
+
+    with tab7:
+        st.title('Instrução para Atualização de Dados de Usuários')
+        st.image('img_6.png')
+        st.write('USE AS ABAS DE ATUALIZAÇÃO DE DADOS DE USUÁRIO, DISPONÍVEL NA SEÇÃO “CADASTRAR USUARIOS”')
+
+    with tab8:
+        st.title('Instrução para Realizar Vendas')
+        st.image('img_7.png')
+        st.write('NA SEÇÃO DE VENDAS, INFORME O CÓDIGO DE BARRAS DO PRODUTO QUE DESEJA VENDER, E TAMBÉM A QUANTIDADE, '
+                 'E CLIQUE EM INSERIR, APÓS ISSO O PRODUTO IRÁ PARA O CARRINHO, CASO DESEJE RETIRAR PRODUTOS DO '
+                 'CARRINHO, INFORME O ID DO PRODUTO E CLIQUE EM RETIRAR.')
+        st.write('')
+        st.image('img_8.png')
+        st.write('APÓS INFORMAR O CÓDIGO DE BARRAS DE TODOS OS PRODUTOS, CONCLUA A VENDA CLICANDO EM FINALIZAR COMPRA.')
 
 
 def cadastrar_produto():
