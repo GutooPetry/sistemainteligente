@@ -103,6 +103,7 @@ def menu():
             st.session_state.clear()
             st.experimental_rerun()
 
+        st.write('')
         if st.sidebar.button('Documentação'):
             st.session_state.form_to_show = 'documentacao'
 
